@@ -5,4 +5,12 @@
 # 问总共有多少条不同的路径？
 class Solution:
     def uniquePaths(self, m: int, n: int) -> int:
-        
+        def step(row, col):
+            # print(row, col)
+            if row == m or col == n:
+                return 1
+            else:
+                return step(row+1, col) + step(row, col+1)
+        return step(1, 1)
+s = Solution()
+s.uniquePaths(23, 12)
