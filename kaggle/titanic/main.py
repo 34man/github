@@ -4,8 +4,8 @@ import sys
 import numpy as np
 sys.path.append('.')
 
-train.head()
-train.plot.scatter('', y)
+train = pd.read_csv('kaggle/titanic/train.csv')
+test = pd.read_csv('kaggle/titanic/test.csv')
 print(train.columns)
 print(train.dtypes)
 def pre_deal(train):
