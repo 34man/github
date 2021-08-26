@@ -1,5 +1,6 @@
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
+
 import sys
 import numpy as np
 sys.path.append('.')
@@ -14,6 +15,7 @@ def pre_deal(train):
     train['Sex'].replace('female', 1, inplace=True)
     x_train = train[['Pclass', 'Sex', 'Age', 'SibSp', 'Parch', 'Fare']]
     return x_train
+
 x_test = pre_deal(test)
 logistic = LogisticRegression()
 logistic.fit(x_train, y_train)
