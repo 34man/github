@@ -70,3 +70,126 @@ class Solution:
         return dp[-1]
 s = Solution()
 s.uniquePathsWithObstacles([[0,0,0,0],[1,1,0,0],[0,0,0,0],[0,0,0,0]])
+
+
+# 34. 在排序数组中查找元素的第一个和最后一个位置
+# 给定一个按照升序排列的整数数组 nums，和一个目标值 target。找出给定目标值在数组中的开始位置和结束位置。
+
+# 如果数组中不存在目标值 target，返回 [-1, -1]。
+# nums = [5,7,7,8,8,10], target = 8
+# 输出：[3,4]
+# 示例 2：
+#
+# 输入：nums = [5,7,7,8,8,10], target = 6
+# 输出：[-1,-1]
+# 示例 3：
+#
+# 输入：nums = [], target = 0
+# 输出：[-1,-1]
+
+# class Solution:
+#     def searchRange(self, nums, target):
+#         mild = len(nums)//2
+#         if len(nums) < 2:
+#             return [-1, -1]
+#         elif nums[mild] > target:
+#             return self.searchRange(nums[:mild], target)
+#         elif nums[mild] < target:
+#             return self.searchRange(nums[mild:], target)
+#         elif nums[mild] == target:
+#             if nums[mild-1] == target:
+#                 return [mild-1, mild]
+#             else:
+#                 return [mild, mild+1]
+#         else:
+#             return [-1, -1]
+#
+# s = Solution()
+# s.searchRange([1,1,2,2,3,4,5], 5)
+
+# 二分法寻找
+class Solution:
+    def searchRange(self, nums, target):
+        left = 0
+        right = len(nums)-1
+        while left <= right:
+            mild = (right - left)//2 + 1
+            if nums[mild] < target:
+                left = mild
+            elif nums[mild] > target:
+                right = mild
+            elif nums[mild] == target:
+                left = self.searchRange(nums[: mild+1], target)
+                right = self.searchRange(nums[mild-1:], target)
+
+        return [left, right]
+s = Solution()
+s.searchRange([1,2,3], 2)
+
+# 二分法基础
+# 给定一个 n 个元素有序的（升序）整型数组 nums 和一个目标值 target  ，写一个函数搜索 nums 中的 target，如果目标值存在返回下标，否则返回 -1。
+
+class Solution:
+    def search(self, nums, target):
+        left = 0
+        right = len(nums)-1
+        while 1:
+            mild = (right-left) // 2
+            if nums[mild] == target:
+                return mild
+            elif nums[mild] > target:
+                right = mild - 1
+            elif nums[mild] < target:
+                left = mild + 1
+            else:
+                return -1
+
+s = Solution()
+s.search([1,2,3,4], 4)
+
+
+
+给定一个包含非负整数的 m x n 网格 grid ，请找出一条从左上角到右下角的路径，使得路径上的数字总和为最小。
+
+说明：每次只能向下或者向右移动一步。
+
+输入：grid = [[1,3,1],[1,5,1],[4,2,1]]
+输出：7
+class Solution:
+    def minPathSum(self, grid):
+        dp = [100000]*len(grid[0])
+        dp[0] = grid[0][0]
+        for tip, ele in enumerate(grid):
+            for i, num in enumerate(ele):
+                if i > 0:
+                    dp[i] = min(dp[i-1] + num, dp[i] + num)
+                    print(dp)
+                if i == 0 and tip != 0:
+                    dp[i] = dp[0] + num
+        print(dp)
+        return dp[-1]
+s = Solution()
+s.minPathSum([[1,2,3], [4,5,6]])
+
+一维数组动态规划
+class Solution:
+    def minPathSum(self, grid: List[List[int]]) -> int:
+        dp = [100000]*len(grid[0])
+        dp[0] = grid[0][0]
+        for tip, ele in enumerate(grid):
+            for i, num in enumerate(ele):
+                if i > 0:
+                    dp[i] = min(dp[i-1] + num, dp[i] + num)
+                if i == 0 and tip != 0:
+                    dp[i] = dp[0] + num
+        return dp[-1]
+
+
+
+
+
+
+
+
+
+pass
