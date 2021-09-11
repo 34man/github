@@ -9,9 +9,9 @@ from imutils.video import FPS
 from imutils.video import VideoStream
 
 
-RTSP_URL=<RTSP URL>
-YOLO_PATH="yolo-coco"
-OUTPUT_FILE="output/outfile.avi"
+RTSP_URL = "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov"
+YOLO_PATH = "D:\git\yolov5"
+OUTPUT_FILE = "./output/outfile.avi"
 # load the COCO class labels our YOLO model was trained on
 labelsPath = os.path.sep.join([YOLO_PATH, "coco.names"])
 LABELS = open(labelsPath).read().strip().split("\n")
@@ -36,7 +36,7 @@ ln = [ln[i[0] - 1] for i in net.getUnconnectedOutLayers()]
 
 # initialize the video stream, pointer to output video file, and
 # frame dimensions
-vs = cv2.VideoCapture(RTSP_URL)
+vs = cv2.VideoCapture("rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov")
 time.sleep(2.0)
 fps = FPS().start()
 writer = None
